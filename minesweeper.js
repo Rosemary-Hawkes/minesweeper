@@ -79,8 +79,6 @@ function startGame () {
   lib.initBoard()
 };
 
-
-
 //Define this function to look for a win condition:
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
@@ -91,28 +89,21 @@ function checkForWin () {
   
   for (let i = 0; i < board.cells.length; i++) {
   
-    if (board.cells[i].isMine === "true" && board.cells[i].isMarked === "true") {
+    if (board.cells[i].isMine == "true" && board.cells[i].isMarked === "true") {
     markedMines ++;
   }; 
-    if (board.cells[i].isMine === "true" && board.cells[i].isMarked === 'false') {
-    return;
-  };
-    if (board.cells[i].isMine === "false" && board.cells[i].hidden === "false") {
+  
+    if (board.cells[i].hidden === "false") {
       markedEmptyCells ++;
   };
-    if (board.cells[i].isMine === "false" && board.cells[i].hidden === "true") {
-    return;
-  };
   
-  };            
- //close loop
+  };           
+ 
 // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
-  if (markedMines + markedNotMines === board.cells.length) {
-    lib.displayMessage("You win!")
-
- };
- //close function
+  if (markedMines + markedEmptyCells == board.cells.length) {
+    lib.displayMessage("You win!");  
+  };
 };
   
 
@@ -156,9 +147,25 @@ function countSurroundingMines(cell) {
   // return total number of true mines
   return count;
 }
+
+
+
+
+
+
+
 //Function returns number of cells around the current cell where isMine = true.
 //To be clear, you don't need to write lib.getSurroundingCells... you can just start using it!
 //var surroundingCells = getSurroundingCells(row, col);
 //hink about how to get row and col out of your cell object: remember dot and bracket notation?
 //You're going to have to loop through the surrounding cells returned from getSurroundingCells, checking each one to see if it's a mine and adding to a count variable if it is.
 //Once you have the correct count, return it.
+
+//Code I removed:
+//  if (board.cells[i].isMine == "true" && board.cells[i].isMarked === 'false') {
+  //  return;
+  //};
+  //  if (board.cells[i].isMine == "false" && board.cells[i].hidden === "true") {
+  //  return;
+  //};
+  //close loop
